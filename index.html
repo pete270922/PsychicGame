@@ -1,39 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta charset="UTC-8">
-    <title>"Word Guess Game"</title>
+    <title>Psychic Game</title>
 </head>
 <body>
+    <h1>This is the Psychic Letter Game!</h1>
+    <div id="game">
+        <h1>Press a letter to start playing!</h1>
+    </div>
 
-    <p>
-    Word Guess Game
-    </p>
     <script type="text/javascript">
-    
+    // Tracks score of wins and losses
     var wins=0;
     var losses=0;
-    var ties=0;
+    // Variable that tracks the number guesses each game.
+    var Guess=10;
+
+     var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
     
-    var Counter=0;
-
-    var computerChoices = ["canine", "turtle", "dolphin"];
-
-    document.onkeyup= function(event){
-        var userGuess = event.key.lowerCase;
-        var computerChoices = computerChoices[Math.floor(Math.random()*computerChoices.length)];
-
-        //Break word into array
-
-        //Match letter to array
-
-        //Count letters strikes based on 
+    // Function to run when user lets key return to original position
+    document.onKeyup= function(event){
+        //Determines the key the was press and converts it to lower case.
+        var userGuess = event.key;
+        // Sets compGuess for letters array based on random number algorithm.
+        var compGuess = letters[Math.floor(Math.random()*letters.length) + 1];
+        // Ensures that maximum guess have not been used.
+    if (Guess!==0){
+        if((userGuess === "a")||(userGuess === "b")||(userGuess === "c")||(userGuess === "d")||(userGuess === "e")||(userGuess === "f")||(userGuess === "g")||(userGuess === "h")||(userGuess === "i")||(userGuess === "j")||(userGuess === "k")||(userGuess === "l")||(userGuess === "m")||(userGuess === "n")||(userGuess === "o")||(userGuess === "p")||(userGuess === "q")||(userGuess === "r")||(userGuess === "s")||(userGuess === "t")||(userGuess === "u")||(userGuess === "v")||(userGuess === "s")||(userGuess === "t")||(userGuess === "u")||(userGuess === "v")||(userGuess === "w")||(userGuess === "x")||(userGuess === "y")||(userGuess === "z")){
+                if(Guess===0){ 
+                    loss++;
+                    Guess=10;
+                }
+                else {
+                    if (userGuess == compGuess){
+                        //Select the element with the id "score", and insert userGuess and compGuess.
+                        wins++;
+                        Guess=10;
+                        alert("Win!");
+                    }
+                    else if (userGuess != compGuess){
+                        Guess--;
+                    }
+                }
+            }
+                var html =
+                "<h3> wins =" + wins + "</h3>"+
+                "<h3> losses =" + losses + "</h3>"+
+                "<h4> Guesses =" + Guess + "</h4>";
+                //Put the last userGuess in front of the previous userGuess
+                document.querySelector("#game").innerHTML = html; 
+        }
+        else document.querySelector("#game").innerHTML = "Press Letter Key to start"
     };
-
-    
-
-
     </script>
 
 </body>
